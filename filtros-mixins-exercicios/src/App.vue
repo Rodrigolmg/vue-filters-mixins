@@ -4,11 +4,26 @@
 		<hr>
 		<p>{{cpfDoAluno | cpf | reverse}}</p>
 		<input type="text" :value="cpfDoAluno | cpf | reverse">
+		<Fruits/>
+		<hr>
+		<div>
+			<ul>
+				<li v-for="fruit in fruits" :key="fruit">{{fruit}}</li>
+			</ul>
+			<input type="text" v-model="fruit" @keydown.enter="addFruit">
+    	</div>
 	</div>
 </template>
 
 <script>
+import Fruits from '@/Fruits.vue'
+import fruitsMixin from '@/fruitsMixin'
+
 export default {
+	components:{
+		Fruits
+	},
+	mixins: [fruitsMixin],
 	filters: {
 		cpf(value){
 			const cpf = value.split('')
@@ -21,7 +36,7 @@ export default {
 	},
 	data() {
 		return {
-			cpfDoAluno: '60070080090'
+			cpfDoAluno: '60070080090',
 		}
 	}
 }
